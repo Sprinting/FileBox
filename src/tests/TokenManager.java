@@ -1,6 +1,8 @@
-package security;
+package tests;
 
 import java.util.HashMap;
+
+import security.JsonWebToken;
 
 public class TokenManager {
 
@@ -18,7 +20,7 @@ public class TokenManager {
 			headerMap.put("alg", "HS256");
 			headerMap.put("typ", "JWT");
 			
-			payloadMap.put("iss", "FileBox.src.security.TokenManager");
+			payloadMap.put("iss", "FileBox.src.tests.TokenManager");
 			payloadMap.put("sub", "test");
 			payloadMap.put("aud", "null");
 			payloadMap.put("exp", new Long(System.currentTimeMillis()+600L).toString());
@@ -33,6 +35,7 @@ public class TokenManager {
 			boolean verified;
 			verified=testToken.verifyJWT(signedJWT, key);
 			System.out.println(verified);
+			System.out.println(testToken.decodeJWT(signedJWT));
 			
 			
 		} catch (Exception e) {

@@ -1,7 +1,9 @@
 package security;
 
+import java.io.File;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -12,7 +14,6 @@ import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import javax.json.JsonReader;
 import javax.json.JsonString;
-
 import org.apache.tomcat.util.codec.binary.Base64;
 
 public class JsonWebToken 
@@ -20,7 +21,7 @@ public class JsonWebToken
 	final static String ALGORITHM="HmacSHA256";
 	final static String ALG="HS256";
 	
-	JsonWebToken()
+	public JsonWebToken()
 	{
 	}
 	/*
@@ -30,10 +31,11 @@ public class JsonWebToken
 	{
 		JsonObjectBuilder jsonBuilder=Json.createObjectBuilder();
 		map.forEach((key,value) ->{
+			
 			jsonBuilder.add(key.toString(), value.toString());
 		});
 		JsonObject json=jsonBuilder.build();
-		System.out.println("HashMap<String,String> as JSON:\n"+json.toString());
+		
 		return json.toString();
 		
 	}
@@ -147,10 +149,14 @@ public class JsonWebToken
 	public ArrayList<String> decodeJWT(String token) throws UnsupportedEncodingException
 	{
 		 ArrayList<String> decoded=new ArrayList<String>();
+		 int j=0;
 		 for(final String i:token.split("\\."))
 		 {
+			 if(j>1)
+				 break;
 			decoded.add(new String(Base64.decodeBase64(i),
-					"UTF-8")); 
+					"UTF-8"));
+			j++;
 		 }
 		return decoded;
 	}
@@ -178,6 +184,29 @@ public class JsonWebToken
 			e.printStackTrace();
 		}
 		return true;
+	}
+	public String makeJson(String key, ArrayList<String> values) {
+		key="\""+key+"\"";
+		String dateKey="\"uploaded\"";
+		ArrayList<String> dates=new ArrayList<String>();
+		ArrayList<String> names=new ArrayList<String>();
+		SimpleDateFormat dateFormat=new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+		for(String i:values)
+		{
+			
+			File f=new File(i);
+			if(f.exists())
+			{
+				dates.add("\""+dateFormat.format((f.lastModified()))+"\"");
+			}
+			i="\""+i+"\"";
+			
+			names.add(i);
+			
+		}
+		
+		
+		return "{\"files\":"+names+","+dateKey+":"+dates+"}"; 
 	}
 	
 }

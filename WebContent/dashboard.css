@@ -1,0 +1,8 @@
+@CHARSET "ISO-8859-1";
+span.fileLink
+{
+    padding: 2px;
+    position: relative;
+    display: block;
+    
+}
