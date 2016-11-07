@@ -41,6 +41,7 @@ public class FileDownload extends HttpServlet {
 		String user,file;
 		user=request.getParameter("u");
 		file=request.getParameter("f");
+		System.out.println("getFile doGet Called");
 		if(user==null || file==null)
 			response.sendRedirect("dashboard.jsp");
 		
