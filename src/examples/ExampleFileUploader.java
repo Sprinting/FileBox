@@ -108,8 +108,12 @@ public class ExampleFileUploader extends HttpServlet {
 				fileManager=new UploadManager(filepart,username,uploadLocation,sqldbDetails[0],
 											sqldbDetails[1],sqldbDetails[2]);
 				try {
+					if(filepart.getSubmittedFileName().equals(""))
+					{
+						response.sendRedirect(this.getServletContext().getContextPath()+"/dashboard.jsp");
+					}
 					
-					if(fileManager.connect())
+					else if(fileManager.connect())
 						{
 							uploaded =uploaded && fileManager.upload("sample_user_files","sample_files", "sample_users");
 							System.out.println("Uploaded "+filepart.getSubmittedFileName());

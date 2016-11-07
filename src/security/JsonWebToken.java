@@ -13,7 +13,6 @@ import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import javax.json.JsonReader;
-import javax.json.JsonString;
 import org.apache.tomcat.util.codec.binary.Base64;
 
 public class JsonWebToken 
@@ -92,13 +91,9 @@ public class JsonWebToken
 	String parseJson(String prop,String json)
 	{
 		JsonReader payloadReader=Json.createReader(new StringReader(json));
-		JsonString res;
-		if((res=payloadReader.readObject().getJsonString(prop))!=null)
-		{
-			System.out.println(prop+" : "+res.getString());
-			return res.getString();
-		}
-		else return null;
+		String res=payloadReader.readObject().get(prop).toString();
+		payloadReader.close();
+		 return res;
 	}
 	/*
 	 * 

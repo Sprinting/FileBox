@@ -11,10 +11,12 @@ import security.JsonWebToken;
 
 public class DashboardManager 
 {
-	String username,dbuser="root", dbpass="parth@kartik123";
+	String fileDetails,username,dbuser="root", dbpass="parth@kartik123";
+	JsonWebToken jt=null;
 	public DashboardManager(String username)
 	{
 		this.username=username;
+		this.jt=new JsonWebToken();
 	}
 	
 	public  String prepareFileListJson(String database) throws SQLException
@@ -22,7 +24,7 @@ public class DashboardManager
 		PreparedStatement stmt = null;
 		Connection con=null;
 		ResultSet rs=null;
-		JsonWebToken jt=new JsonWebToken();
+		
 		final String driver="com.mysql.jdbc.Driver";
 		String db="jdbc:mysql://localhost/"+database+"?useSSL=false";
 		ArrayList<String> userFiles=new ArrayList<String>();
@@ -74,16 +76,23 @@ public class DashboardManager
 				stmt.close();
 			}
 		}
-		return jt.makeJson(username,userFiles);
+		fileDetails=jt.makeJson(username,userFiles);
+		return fileDetails;
 		
 	}
+	public static boolean checkFileOwnership(String username,String filepath)
+	{
+		
+		return true;
+	}
+	
 	public static void main(String args[])
 	{	
-		DashboardManager newManager=new DashboardManager("Lakshay");
+		DashboardManager newManager=new DashboardManager("Kartik");
 		
 		try {
 		System.out.println(newManager.prepareFileListJson("samples"));
-			newManager=new DashboardManager("Kartik");
+			
 			//System.out.println(newManager.prepareFileListJson("samples"));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -1,4 +1,4 @@
-package service;
+package service.filters;
 
 import java.io.IOException;
 import javax.servlet.Filter;
@@ -15,8 +15,6 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet Filter implementation class LoginFilter
  */
 @WebFilter(
-			urlPatterns={"/dashboard.jsp","/dashboard","/dashboard.js"},
-			servletNames={"examples.ExampleFileUploader","service.Dashboard"}
 		)
 public class LoggedInFilter implements Filter {
 

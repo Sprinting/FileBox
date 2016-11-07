@@ -52,6 +52,8 @@ public class UploadManager {
 		{
 			String filename=filepart.getSubmittedFileName();
 			filename=Paths.get(filename).getFileName().toString(); // fix for buggy .getSubmittedFilename()
+			if(filename.equals(""))
+				return false;
 			String filepath=uploadLocation+File.separator+filename;
 			System.out.println(filepath);
 			filepath=filepath.replace("\\", "/");

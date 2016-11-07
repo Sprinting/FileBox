@@ -2,7 +2,14 @@
  * This file loads the user's dashboard by sending a GET request to /FileBox/dashboard 
  */
 
-var x=null;
+let forEach = (array,callback,scope)=>
+    {
+        for(let i=0;i<array.length;i++)
+            {
+                callback.call(scope,i,array[i]);
+            }
+    };
+
 function show_loader() {
     /*
     * show loading anims here. Call before request
@@ -15,7 +22,7 @@ function hide_loader() {
 };
 
 function getUserData(url, timeout) {
-    //send a request to /FileBox/dashboard
+    //send an async GET request to /FileBox/dashboard
     return new Promise((resolve,reject)=>{
         let request= new XMLHttpRequest();
             request.open('GET',url);
@@ -36,7 +43,34 @@ function getUserData(url, timeout) {
     
 };
 
+/*
+debug var, move to function
+*/
+function link_context_menu(idx,node)
+{
+    contextNode=document.getElementById("context_links")
+    console.log(node);
+    let shareNode,downloadNode=null;
+    node.addEventListener("onclick",(evt)=>{
+    evt.preventDefault();
+    shareNode=document.createElement("a");
+    shareNode.appendChild(document.
+                          createTextNode("Share this file"));
+    shareNode.setAttribute("href","#");
 
+    downloadNode=document.createElement("a");
+    downloadNode.appendChild(document.
+                          createTextNode("download this file"));
+    downloadNode.setAttribute("href",node.getAttribute("href"));
+    contextNode.appendChild(downloadNode);
+    contextNode.appendChild(shareNode);
+    },false)
+    console.log(idx,"shareNode",shareNode);
+    console.log(idx,"downloadNode",downloadNode);
+    console.log(idx,"contextNode",contextNode);
+};
+
+let linkNodeList=null;
 function populateHTML(data)
 {
     let dashboard=document.getElementById("dashboard");
@@ -79,14 +113,21 @@ function populateHTML(data)
         let uploadDate=document.createElement("td");
         downloadFilename.appendChild(linkSpan);
         uploadDate.appendChild(document
-                               .createTextNode(filedates[idx]));
+                               .createTextNode(filedates[idx    ]));
         downloadTableRow.appendChild(downloadFilename);
         downloadTableRow.appendChild(uploadDate);
         downloadTable.appendChild(downloadTableRow);
         return true;
     }
                  );
+   
+    linkNodeList=document.getElementsByClassName("fileLink");
+    forEach(linkNodeList,(idx,node)=>{
+        link_context_menu(idx,node);
+});
 }
+
+
 
 window.onload= ()=>{
 	//alert("Hi");

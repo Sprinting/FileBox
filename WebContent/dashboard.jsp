@@ -16,13 +16,14 @@
 			<form method="post" action="example/upload" enctype="multipart/form-data">
 				<label for="upload">Select a file to upload</label>
 				<input id="upload" type="file" name="filesName">
-				<hr>
 				<button type="Submit">Upload</button>
 			</form>
 		</div>
 	</section>
 	<hr>
 	<section id="dashboard">
+        <section id="context_links">
+        </section>
 	</section>
 	<nav class="bottom">
 	<a href="/FileBox/logout">Logout</a>
