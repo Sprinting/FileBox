@@ -22,7 +22,7 @@ public class LoginInit extends HttpServlet {
 	/*
 	 * read these from files in final version
 	 */
-    private static final String[] sqldbDetails={"root","parth@kartik123"};   
+    private static final String[] sqldbDetails={"root","not happening"};   
     /**
      * @see HttpServlet#HttpServlet()
      */
