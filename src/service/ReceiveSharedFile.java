@@ -77,8 +77,8 @@ public class ReceiveSharedFile extends HttpServlet {
 						filepath=this.getInitParameter("fileRoot").toString()+
 								owner+"\\"+file;
 						System.out.println(filepath);
-						
-						if(new File(filepath).exists() && loginSession==null)
+						//TODO implement a sqlmanager class for logged in users,lol
+						if(new File(filepath).exists() && (loginSession==null||loginSession!=null))
 						{
 							response.setContentType("application/octet-stream");
 							response.setContentType("application/octet-stream");
