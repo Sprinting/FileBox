@@ -11,7 +11,7 @@ import security.JsonWebToken;
 
 public class DashboardManager 
 {
-	String fileDetails,username,dbuser="root", dbpass="parth@kartik123";
+	String fileDetails,username,dbuser="root", dbpass="lolnope";
 	JsonWebToken jt=null;
 	public DashboardManager(String username)
 	{
