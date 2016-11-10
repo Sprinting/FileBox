@@ -59,7 +59,7 @@ The default size is unlimited.
 
 public class ExampleFileUploader extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String[] sqldbDetails={"samples","root","parth@kartik123"};  
+	private static final String[] sqldbDetails={"samples","root","neveer"};  
     /**
      * @see HttpServlet#HttpServlet()
      */
