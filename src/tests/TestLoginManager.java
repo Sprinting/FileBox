@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import security.LoginException;
 import security.SQLManager;
 public class TestLoginManager {
-	final static String[] loginDetails={"root","parth@kartik123"};
+	final static String[] loginDetails={"root","nope"};
 
 	public static void main(String[] args) {
 		
