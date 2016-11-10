@@ -28,6 +28,7 @@ public class DashboardManager
 		final String driver="com.mysql.jdbc.Driver";
 		String db="jdbc:mysql://localhost/"+database+"?useSSL=false";
 		ArrayList<String> userFiles=new ArrayList<String>();
+		ArrayList<String> shareFiles=new ArrayList<String>();
 		try {
 			Class.forName(driver);
 			con=DriverManager.getConnection(db,dbuser,dbpass);
@@ -52,8 +53,26 @@ public class DashboardManager
 				//fp="'"+fp+"'";
 				userFiles.add(fp);
 			}
+			rs.close();
+			stmt.close();
+			query="select sample_users.username,sample_shares.sfid as shared_file_id,sample_files.filepath from "
+					+ "sample_users inner join sample_shares on "
+					+ "sample_users.uid=sample_shares.uid "
+					+ "inner join sample_files on "
+					+ "sample_files.fid=sample_shares.sfid where username like ?";
 			
-			
+			stmt=con.prepareStatement(query);
+			stmt.setEscapeProcessing(true);
+			stmt.setString(1, username);
+			rs=stmt.executeQuery();
+			System.out.println(username);
+			//System.out.println(rs.getMetaData().getColumnCount());
+			while(rs.next())
+			{
+				String fp=rs.getString("filepath");
+				//System.out.println(fp);
+				shareFiles.add(fp);
+			}
 			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -76,7 +95,8 @@ public class DashboardManager
 				stmt.close();
 			}
 		}
-		fileDetails=jt.makeJson(username,userFiles);
+		
+		fileDetails=jt.makeJson(username,userFiles,shareFiles);
 		return fileDetails;
 		
 	}
@@ -88,7 +108,7 @@ public class DashboardManager
 	
 	public static void main(String args[])
 	{	
-		DashboardManager newManager=new DashboardManager("Kartik");
+		DashboardManager newManager=new DashboardManager("Lakshay");
 		
 		try {
 		System.out.println(newManager.prepareFileListJson("samples"));

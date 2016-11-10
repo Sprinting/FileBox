@@ -121,13 +121,13 @@ public class JsonWebToken
 		//secret key 
 		sha256_HMAC.init(secret);
 		String hash=Base64.encodeBase64URLSafeString(sha256_HMAC.doFinal(data.getBytes("UTF-8")));
-		System.out.println("hash: "+hash);
+		//System.out.println("hash: "+hash);
 		return hash;
 	}
 	/*
 	 * 
 	 */
-	public   String getJWT(String header,String data) throws Exception
+	public   String getJWT(String header,String data) throws UnsupportedEncodingException 
 	{
 		String JWT=Base64.encodeBase64URLSafeString(header.getBytes("UTF-8"))+"."
 				+Base64.encodeBase64URLSafeString(data.getBytes("UTF-8"));
@@ -136,7 +136,7 @@ public class JsonWebToken
 	/*
 	 * 
 	 */
-	public  String signJWT(String token,String sign)throws Exception
+	public  String signJWT(String token,String sign) throws Exception
 	{
 		return token+"."+encode_signature(token,sign);
 		
@@ -166,8 +166,8 @@ public class JsonWebToken
 			{
 				String testJWT=getJWT(header,payload);
 				String signature=encode_signature(testJWT,secret);
-				System.out.println("Verifier: "+signature);
-				System.out.println("Candidate: "+token.split("\\.")[2]);
+				//System.out.println("Verifier: "+signature);
+				//System.out.println("Candidate: "+token.split("\\.")[2]);
 				return (signature.equals(token.split("\\.")[2]));
 				
 			}
@@ -180,13 +180,14 @@ public class JsonWebToken
 		}
 		return true;
 	}
-	public String makeJson(String key, ArrayList<String> values) {
+	public String makeJson(String key, ArrayList<String> userFiles, ArrayList<String> shareFiles) {
 		key="\""+key+"\"";
 		String dateKey="\"uploaded\"";
+		System.out.println("SharedFiles "+shareFiles);
 		ArrayList<String> dates=new ArrayList<String>();
 		ArrayList<String> names=new ArrayList<String>();
 		SimpleDateFormat dateFormat=new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-		for(String i:values)
+		for(String i:userFiles)
 		{
 			
 			File f=new File(i);
@@ -201,7 +202,26 @@ public class JsonWebToken
 		}
 		
 		
-		return "{\"files\":"+names+","+dateKey+":"+dates+"}"; 
+		String json= "{\"files\":"+names+","+dateKey+":"+dates+",";
+		names.clear();
+		dates.clear();
+		
+		for(String i:shareFiles)
+		{
+			
+			File f=new File(i);
+			if(f.exists())
+			{
+				dates.add("\""+dateFormat.format((f.lastModified()))+"\"");
+			}
+			i="\""+i+"\"";
+			
+			names.add(i);
+			
+		}
+		dateKey="\"share_uploaded\"";
+		json+="\"shared\":"+names+","+dateKey+":"+dates+"}";
+		return json;
 	}
 	
 }

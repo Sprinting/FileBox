@@ -46,7 +46,9 @@ public class Dashboard extends HttpServlet {
 			try
 			{
 				response.setContentType("application/json");
-				response.getWriter().write(userManager.prepareFileListJson("samples"));
+				String json=userManager.prepareFileListJson("samples");
+				loginSession.setAttribute("jsonResponse", json);
+				response.getWriter().write(json);
 			} catch (SQLException e) {
 				
 				e.printStackTrace();

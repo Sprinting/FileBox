@@ -24,6 +24,10 @@
 	<section id="dashboard">
         <section id="context_links">
         </section>
+        <section id="user_files">
+        </section>
+        <section id="share_files">
+        </section>
 	</section>
 	<nav class="bottom">
 	<a href="/FileBox/logout">Logout</a>

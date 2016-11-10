@@ -16,7 +16,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebFilter(
 			urlPatterns={"/","/dashboard.jsp","/dashboard","/dashboard.js"},
-			servletNames={"examples.ExampleFileUploader","service.Dashboard","service.FileDownload"}
+			servletNames={"examples.ExampleFileUploader",
+					"service.Dashboard",
+					"service.FileDownload"}
 		)
 public class LoggedInFilter implements Filter {
 
