@@ -91,7 +91,7 @@ function populateHTML(data)
     console.log(sharenames);
     console.log(shareusers);
     let downloadTable=document.createElement("table");
-    let sharedTable=document.createElement("table");
+    //let sharedTable=document.createElement("table");
     
     let tableHeaderRow=document.createElement("tr");
     let filenameHeader=document.createElement("th");
@@ -107,11 +107,11 @@ function populateHTML(data)
     tableHeaderRow.appendChild(uploadDateHeader);
     
     
-    sharedTable.appendChild(tableHeaderRow.cloneNode(true));
+    //sharedTable.appendChild(tableHeaderRow.cloneNode(true));
     tableHeaderRow.appendChild(shareHeader);
     downloadTable.appendChild(tableHeaderRow);
     file_dashboard.appendChild(downloadTable);
-    share_file_dashboard.appendChild(sharedTable);
+    //share_file_dashboard.appendChild(sharedTable);
     
     filenames.map((file,idx)=>
     {
@@ -153,7 +153,7 @@ function populateHTML(data)
                  );
     
     //make a function,lol
-    sharenames.map((file,idx)=>
+    /*sharenames.map((file,idx)=>
     {
         let uri="/FileBox/getFile?u="+shareusers[idx]+"&f="+file;
         let linkSpan=document.createElement("span");
@@ -174,7 +174,7 @@ function populateHTML(data)
         sharedTable.appendChild(downloadTableRow);
         return true;
     }
-                 );
+                 );*/
    
     linkNodeList=document.getElementsByClassName("fileLink");
     forEach(linkNodeList,(idx,node)=>{

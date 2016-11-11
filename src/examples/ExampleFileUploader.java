@@ -73,7 +73,7 @@ public class ExampleFileUploader extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.sendRedirect("index.jsp");;
 	}
 
 	/**
@@ -147,9 +147,9 @@ public class ExampleFileUploader extends HttpServlet {
 					}
 				}
 								if(uploaded)
-					response.getWriter().println("Success");
+					response.getWriter().println("{\"status\":true}");
 				else
-					response.getWriter().println("Failure");
+					response.getWriter().println("{\"status\":false}");
 			}
 		}
 		
