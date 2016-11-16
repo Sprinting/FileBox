@@ -4,12 +4,20 @@
 	<meta charset="ISO-8859-1">
 	<title>${sessionScope.username}-Dashboard</title>
     <link rel="stylesheet" href="dashboard.css">
+    <script type="text/javascript" src="router.js"></script>
 	<script type="text/javascript" src="dashboard.js"></script>
+
 	</head>
 <body>
 	<aside class="left">
 		Welcome,<br>${username}
 	</aside>
+	<nav class="navbar">
+        <ul>
+            <li><a href="#upload">Upload</a></li>
+            <li><a href="#dashboard">Dashboard</a></li>
+        </ul>
+    </nav>
 	<hr>
 	<section class="upload">
 		<div class="upload form">
