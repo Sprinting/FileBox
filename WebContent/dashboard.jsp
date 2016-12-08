@@ -3,7 +3,7 @@
 <head>
 	<meta charset="ISO-8859-1">
 	<title>${sessionScope.username}-Dashboard</title>
-    <link rel="stylesheet" href="dashboard.css">
+    
     <script type="text/javascript" src="router.js"></script>
 	<script type="text/javascript" src="dashboard.js"></script>
 
