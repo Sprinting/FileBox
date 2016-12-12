@@ -12,7 +12,6 @@
 #About
 
 To explore the JSP/Servlet API provided by java and to build a website exhibhiting basic functionalities using 
-
 a simple MVC (Model-view-controller) architecture.
 
 ```
