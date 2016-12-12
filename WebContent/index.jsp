@@ -7,8 +7,8 @@
 </head>
 <body>
 <header>
-<h1>The Header Placeholder</h1>
-<h2>Secondary Title</h2>
+
+
 </header>
 <nav>
 Navbar Placeholder
